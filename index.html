@@ -1,0 +1,1389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
+    <title>The Psychology of Money • Complete Exam</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0b1120 0%, #1a2635 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px;
+        }
+
+        .app-container {
+            width: 100%;
+            max-width: 500px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            min-height: calc(100vh - 24px);
+        }
+
+        /* Welcome Screen */
+        .welcome-screen {
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 36px;
+            padding: 40px 24px;
+            box-shadow: 0 30px 50px -15px rgba(0, 0, 0, 0.6);
+            text-align: center;
+            animation: fadeScale 0.4s ease;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+        }
+
+        @keyframes fadeScale {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .welcome-icon {
+            font-size: 70px;
+            margin-bottom: 24px;
+            animation: gentleFloat 3s ease-in-out infinite;
+        }
+
+        @keyframes gentleFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+
+        .welcome-title {
+            font-size: 34px;
+            font-weight: 700;
+            color: #0b1120;
+            margin-bottom: 12px;
+            line-height: 1.2;
+            letter-spacing: -0.5px;
+        }
+
+        .welcome-subtitle {
+            font-size: 16px;
+            color: #4b5565;
+            margin-bottom: 36px;
+            line-height: 1.5;
+        }
+
+        .input-group {
+            margin-bottom: 28px;
+            text-align: left;
+        }
+
+        .input-label {
+            font-size: 14px;
+            font-weight: 600;
+            color: #1f2a3a;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .name-input {
+            width: 100%;
+            padding: 18px 20px;
+            font-size: 16px;
+            border: 2px solid #e2e8f0;
+            border-radius: 24px;
+            outline: none;
+            transition: all 0.3s ease;
+            background: #f8fafc;
+        }
+
+        .name-input:focus {
+            border-color: #0b1120;
+            background: white;
+            box-shadow: 0 4px 12px rgba(11, 17, 32, 0.15);
+        }
+
+        .start-btn {
+            background: linear-gradient(135deg, #0b1120, #1f2a3a);
+            color: white;
+            border: none;
+            padding: 18px 32px;
+            border-radius: 32px;
+            font-weight: 600;
+            font-size: 18px;
+            width: 100%;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 10px 20px -8px #0b1120;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .start-btn:active {
+            transform: scale(0.98);
+            box-shadow: 0 5px 10px -5px #0b1120;
+        }
+
+        .start-btn:disabled {
+            opacity: 0.4;
+            pointer-events: none;
+            box-shadow: none;
+        }
+
+        /* Exam Screen */
+        .exam-screen {
+            display: none;
+            animation: slideUpFade 0.4s ease;
+            width: 100%;
+        }
+
+        @keyframes slideUpFade {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .exam-header {
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 28px;
+            padding: 22px 20px;
+            margin-bottom: 16px;
+            box-shadow: 0 10px 25px -10px rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+        }
+
+        .greeting-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .greeting-text {
+            font-size: 18px;
+            font-weight: 600;
+            color: #0b1120;
+        }
+
+        .greeting-name {
+            color: #1f2a3a;
+            font-weight: 700;
+            background: #f1f5f9;
+            padding: 4px 14px;
+            border-radius: 40px;
+        }
+
+        .badge {
+            background: #0b1120;
+            color: white;
+            padding: 6px 16px;
+            border-radius: 40px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .progress-stats {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-size: 14px;
+            color: #4b5565;
+        }
+
+        .progress-bar-bg {
+            height: 6px;
+            background: #e2e8f0;
+            border-radius: 20px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #0b1120, #2a3748);
+            border-radius: 20px;
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        .question-container {
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 28px;
+            padding: 24px 20px;
+            margin-bottom: 16px;
+            box-shadow: 0 15px 30px -12px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+        }
+
+        .question-number-badge {
+            background: #f1f5f9;
+            color: #0b1120;
+            padding: 6px 16px;
+            border-radius: 40px;
+            font-size: 13px;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+
+        .question-text {
+            font-size: 20px;
+            font-weight: 600;
+            line-height: 1.4;
+            color: #0b1120;
+            margin-bottom: 24px;
+            letter-spacing: -0.3px;
+        }
+
+        .options-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .option-item {
+            background: #f8fafc;
+            border: 2px solid transparent;
+            border-radius: 22px;
+            padding: 16px 20px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            width: 100%;
+            text-align: left;
+            font-size: 16px;
+            color: #1e293b;
+        }
+
+        .option-item:active {
+            transform: scale(0.99);
+        }
+
+        .option-item.wrong-selected {
+            background: #fee2e2;
+            border-color: #dc2626;
+            box-shadow: 0 4px 12px rgba(220, 38, 38, 0.3);
+        }
+
+        .option-item.wrong-selected .option-prefix {
+            background: #dc2626;
+            color: white;
+        }
+
+        .option-item.correct-selected {
+            background: #bbf7d0;
+            border-color: #16a34a;
+            box-shadow: 0 4px 12px rgba(22, 163, 74, 0.3);
+        }
+
+        .option-item.correct-selected .option-prefix {
+            background: #16a34a;
+            color: white;
+        }
+
+        .option-item.revealed-correct {
+            background: #bbf7d0;
+            border-color: #16a34a;
+            box-shadow: 0 4px 12px rgba(22, 163, 74, 0.3);
+            pointer-events: none;
+        }
+
+        .option-item.revealed-correct .option-prefix {
+            background: #16a34a;
+            color: white;
+        }
+
+        .option-item.revealed-wrong {
+            background: #fee2e2;
+            border-color: #dc2626;
+            box-shadow: 0 4px 12px rgba(220, 38, 38, 0.3);
+            pointer-events: none;
+        }
+
+        .option-item.revealed-wrong .option-prefix {
+            background: #dc2626;
+            color: white;
+        }
+
+        .option-prefix {
+            width: 34px;
+            height: 34px;
+            background: white;
+            border-radius: 17px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 15px;
+            color: #4b5565;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            flex-shrink: 0;
+        }
+
+        .insight-box {
+            background: #f1f5f9;
+            border-radius: 20px;
+            padding: 18px;
+            margin-top: 12px;
+            border-left: 4px solid #0b1120;
+            animation: insightPop 0.3s ease;
+        }
+
+        @keyframes insightPop {
+            from { opacity: 0; transform: translateY(-5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .insight-label {
+            font-size: 12px;
+            font-weight: 600;
+            color: #4b5565;
+            letter-spacing: 0.5px;
+            margin-bottom: 6px;
+        }
+
+        .insight-text {
+            font-size: 14px;
+            color: #1e293b;
+            line-height: 1.5;
+            font-style: italic;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 12px;
+            margin-top: 8px;
+        }
+
+        .nav-btn {
+            flex: 1;
+            padding: 18px;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-align: center;
+            border: none;
+            letter-spacing: 0.3px;
+        }
+
+        .nav-btn:active {
+            transform: scale(0.97);
+        }
+
+        .prev-btn {
+            background: #ffffff;
+            color: #0b1120;
+            border: 2px solid #e2e8f0;
+            box-shadow: 0 6px 12px -6px rgba(0, 0, 0, 0.2);
+        }
+
+        .next-btn {
+            background: #2563eb;
+            color: white;
+            box-shadow: 0 6px 14px -6px #2563eb;
+            border: 2px solid #2563eb;
+        }
+
+        .nav-btn:disabled {
+            opacity: 0.3;
+            pointer-events: none;
+            box-shadow: none;
+        }
+
+        /* Results Screen */
+        .results-screen {
+            display: none;
+            animation: fadeScale 0.4s ease;
+            width: 100%;
+        }
+
+        .results-card {
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 36px;
+            padding: 32px 20px;
+            box-shadow: 0 30px 50px -15px rgba(0, 0, 0, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+        }
+
+        .results-icon {
+            font-size: 70px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .results-title {
+            font-size: 32px;
+            font-weight: 700;
+            color: #0b1120;
+            margin-bottom: 8px;
+            text-align: center;
+        }
+
+        .results-subtitle {
+            font-size: 16px;
+            color: #4b5565;
+            margin-bottom: 28px;
+            text-align: center;
+        }
+
+        .score-circle {
+            text-align: center;
+            margin-bottom: 28px;
+        }
+
+        .score-text {
+            font-size: 52px;
+            font-weight: 800;
+            color: #0b1120;
+            line-height: 1;
+        }
+
+        .score-label {
+            font-size: 14px;
+            color: #64748b;
+            margin-top: 4px;
+        }
+
+        .review-section {
+            max-height: 300px;
+            overflow-y: auto;
+            margin-bottom: 24px;
+            padding-right: 4px;
+        }
+
+        .review-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #0b1120;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .review-item {
+            background: #f8fafc;
+            border-radius: 20px;
+            padding: 16px;
+            margin-bottom: 12px;
+            border-left: 4px solid transparent;
+        }
+
+        .review-item.correct-review {
+            border-left-color: #16a34a;
+        }
+
+        .review-item.incorrect-review {
+            border-left-color: #dc2626;
+        }
+
+        .review-question {
+            font-size: 14px;
+            font-weight: 600;
+            color: #0b1120;
+            margin-bottom: 8px;
+        }
+
+        .review-answers {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            font-size: 13px;
+        }
+
+        .review-answer-row {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .review-badge {
+            width: 22px;
+            height: 22px;
+            border-radius: 11px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 11px;
+            color: white;
+            flex-shrink: 0;
+        }
+
+        .review-badge.correct-badge {
+            background: #16a34a;
+        }
+
+        .review-badge.incorrect-badge {
+            background: #dc2626;
+        }
+
+        .review-text {
+            color: #1e293b;
+            flex: 1;
+            line-height: 1.4;
+        }
+
+        .review-text strong {
+            color: #0b1120;
+        }
+
+        .retry-options {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 20px;
+        }
+
+        .retry-btn {
+            padding: 18px;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-align: center;
+            border: none;
+            width: 100%;
+        }
+
+        .retry-btn:active {
+            transform: scale(0.98);
+        }
+
+        .retry-same {
+            background: linear-gradient(135deg, #1e3a5f, #2563eb);
+            color: white;
+            box-shadow: 0 6px 14px -6px #2563eb;
+        }
+
+        .retry-new {
+            background: linear-gradient(135deg, #5b21b6, #7c3aed);
+            color: white;
+            box-shadow: 0 6px 14px -6px #7c3aed;
+        }
+
+        .back-home-btn {
+            background: #f1f5f9;
+            color: #0b1120;
+            border: 2px solid #e2e8f0;
+            padding: 16px;
+            border-radius: 30px;
+            font-weight: 500;
+            font-size: 15px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            width: 100%;
+            margin-top: 8px;
+        }
+
+        .back-home-btn:active {
+            transform: scale(0.98);
+        }
+
+        .review-section::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .review-section::-webkit-scrollbar-track {
+            background: #e2e8f0;
+            border-radius: 4px;
+        }
+
+        .review-section::-webkit-scrollbar-thumb {
+            background: #94a3b8;
+            border-radius: 4px;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Welcome Screen -->
+        <div id="welcomeScreen" class="welcome-screen">
+            <div class="welcome-icon">📚</div>
+            <h1 class="welcome-title">The Psychology<br>of Money</h1>
+            <p class="welcome-subtitle">Chapters 1 & 2<br>50 Questions Complete Exam</p>
+            
+            <div class="input-group">
+                <label class="input-label">Your Name</label>
+                <input type="text" id="userName" class="name-input" placeholder="Enter your name" maxlength="30" autocomplete="off">
+            </div>
+            
+            <button id="startBtn" class="start-btn" onclick="startExam()" disabled>
+                <span>▶</span> Start Exam
+            </button>
+        </div>
+
+        <!-- Exam Screen -->
+        <div id="examScreen" class="exam-screen">
+            <div class="exam-header">
+                <div class="greeting-row">
+                    <span class="greeting-text">👋 <span id="displayName" class="greeting-name"></span></span>
+                    <span class="badge" id="questionCount">20 Questions</span>
+                </div>
+                
+                <div class="progress-stats">
+                    <span id="currentQuestionDisplay">Question 1 of 20</span>
+                    <span id="scoreDisplay">0/20 correct</span>
+                </div>
+                <div class="progress-bar-bg">
+                    <div id="progressBar" class="progress-fill" style="width: 0%;"></div>
+                </div>
+            </div>
+
+            <div id="questionContainer" class="question-container">
+                <!-- Questions will be injected here -->
+            </div>
+
+            <div class="nav-buttons">
+                <button id="prevBtn" class="nav-btn prev-btn" onclick="prevQuestion()" disabled>← Previous</button>
+                <button id="nextBtn" class="nav-btn next-btn" onclick="nextQuestion()">Next →</button>
+            </div>
+        </div>
+
+        <!-- Results Screen -->
+        <div id="resultsScreen" class="results-screen">
+            <div class="results-card">
+                <div class="results-icon">🏆</div>
+                <h2 class="results-title" id="resultGreeting"></h2>
+                <p class="results-subtitle" id="resultMessage"></p>
+                
+                <div class="score-circle">
+                    <div id="finalScoreText" class="score-text">0/20</div>
+                    <div class="score-label">Final Score</div>
+                </div>
+                
+                <div id="reviewContainer" class="review-section">
+                    <!-- Review items will be injected here -->
+                </div>
+                
+                <div class="retry-options">
+                    <button class="retry-btn retry-same" onclick="retrySame()">
+                        📋 Retry with Same Question Set
+                    </button>
+                    <button class="retry-btn retry-new" onclick="retryNew()">
+                        🔀 Retry with New Question Set
+                    </button>
+                    <button class="back-home-btn" onclick="backToHome()">
+                        🏠 Back to Home
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Master Question Bank with all 50 questions and correct answers
+        const masterQuestions = [
+            {
+                id: 1,
+                question: "According to the author, what percentage of how you think the world works is shaped by your personal experiences with money?",
+                correctAnswer: "About 80%",
+                insight: "Your personal experiences with money make up maybe 0.00000001% of what's happened in the world, but maybe 80% of how you think the world works."
+            },
+            {
+                id: 2,
+                question: "What did the Malmendier and Nagel study from the National Bureau of Economic Research discover about people's investment decisions?",
+                correctAnswer: "Investment decisions are heavily anchored to experiences early in adult life",
+                insight: "Individual investors' willingness to bear risk depends on personal history."
+            },
+            {
+                id: 3,
+                question: "What did the Financial Times interview with Bill Gross reveal about his success?",
+                correctAnswer: "His career coincided with a generational collapse in interest rates",
+                insight: "To Gross, bonds were wealth-generating machines. To his father's generation, they might be seen as wealth incinerators."
+            },
+            {
+                id: 4,
+                question: "How did the stock market perform for someone born in 1970 versus someone born in 1950 during their teens and twenties?",
+                correctAnswer: "1970: 10-fold increase; 1950: market went nowhere (adjusted for inflation)",
+                insight: "Two groups of people, separated by chance of their birth year, go through life with a completely different view on how the stock market works."
+            },
+            {
+                id: 5,
+                question: "What was the unemployment rate for African American males age 16 to 19 without a high school diploma in November 2009?",
+                correctAnswer: "49%",
+                insight: "No one should expect members of different groups to go through life thinking the same thing about unemployment."
+            },
+            {
+                id: 6,
+                question: "What was the unemployment rate for Caucasian females over age 45 with a college degree in November 2009?",
+                correctAnswer: "4%",
+                insight: "The same economy can affect different demographics in vastly different ways."
+            },
+            {
+                id: 7,
+                question: "What happened to local stock markets in Germany and Japan during World War II?",
+                correctAnswer: "They were wiped out",
+                insight: "Entire regions were bombed out. German farms only produced enough food to provide 1,000 calories a day."
+            },
+            {
+                id: 8,
+                question: "How did the U.S. stock market perform from 1941 through the end of 1945?",
+                correctAnswer: "More than doubled",
+                insight: "The U.S. economy was the strongest it had been in almost two decades during this period."
+            },
+            {
+                id: 9,
+                question: "What did the nephew of a Chinese factory worker write in response to a New York Times article about sweatshops?",
+                correctAnswer: "Her aunt chose factory work over prostitution, showing different perspectives on 'good' opportunities",
+                insight: "Different experiences can lead to vastly different views within topics that one side intuitively thinks should be black and white."
+            },
+            {
+                id: 10,
+                question: "How much do the lowest-income households in the U.S. spend on lottery tickets per year on average?",
+                correctAnswer: "$412 per year",
+                insight: "Those buying $400 in lottery tickets are by and large the same people who say they couldn't come up with $400 in an emergency."
+            },
+            {
+                id: 11,
+                question: "What percentage of Americans cannot come up with $400 in an emergency?",
+                correctAnswer: "40%",
+                insight: "They are blowing their safety nets on something with a one-in-millions chance of hitting it big."
+            },
+            {
+                id: 12,
+                question: "Who created the first official currency in 600 BC?",
+                correctAnswer: "King Alyattes of Lydia",
+                insight: "Money has been around a long time, but the modern foundation of money decisions is based around concepts that are practically infants."
+            },
+            {
+                id: 13,
+                question: "How much money was in U.S. retirement accounts at the end of 2018?",
+                correctAnswer: "$27 trillion",
+                insight: "Retirement accounts are the main driver of the common investor's saving and investing decisions."
+            },
+            {
+                id: 14,
+                question: "What was the labor force participation rate of men age 65 and over until the 1940s?",
+                correctAnswer: "Above 50%",
+                insight: "Before World War II most Americans worked until they died. That was the expectation and the reality."
+            },
+            {
+                id: 15,
+                question: "How much was Ida May Fuller's first Social Security check in 1940, adjusted for inflation?",
+                correctAnswer: "$416",
+                insight: "Social Security's initial benefits were nothing close to a proper pension."
+            },
+            {
+                id: 16,
+                question: "When did the average Social Security check for retirees exceed $1,000 a month adjusted for inflation?",
+                correctAnswer: "1980s",
+                insight: "It was not until the 1980s that the idea that everyone deserves a dignified retirement took hold."
+            },
+            {
+                id: 17,
+                question: "What percentage of Americans over age 65 were classified as living in poverty until the late 1960s?",
+                correctAnswer: "More than a quarter",
+                insight: "Retirement security is a relatively modern concept."
+            },
+            {
+                id: 18,
+                question: "What percentage of those age 65 or older had pension income in 1975?",
+                correctAnswer: "Only a quarter",
+                insight: "There is a widespread belief that 'everyone used to have a private pension,' but this is wildly exaggerated."
+            },
+            {
+                id: 19,
+                question: "Among that minority with pensions in 1975, what percentage of household income came from the pension?",
+                correctAnswer: "Only 15%",
+                insight: "Pensions were not the primary income source even for those who had them."
+            },
+            {
+                id: 20,
+                question: "What did The New York Times write about retirement in 1955?",
+                correctAnswer: "\"Everyone talks about retirement, but apparently very few do anything about it\"",
+                insight: "The desire for retirement existed, but the ability to achieve it was limited."
+            },
+            {
+                id: 21,
+                question: "When was the 401(k) created?",
+                correctAnswer: "1978",
+                insight: "The 401(k) is the backbone savings vehicle of American retirement."
+            },
+            {
+                id: 22,
+                question: "When was the Roth IRA created?",
+                correctAnswer: "1998",
+                insight: "If it were a person it would be barely old enough to drink."
+            },
+            {
+                id: 23,
+                question: "What percentage of Americans over age 25 had a bachelor's degree in 1940 versus 2015?",
+                correctAnswer: "1 in 20 (1940) to 1 in 4 (2015)",
+                insight: "Something so big and so important hitting society so fast explains why many people have made poor decisions with student loans."
+            },
+            {
+                id: 24,
+                question: "How much did average college tuition rise adjusted for inflation from 1940 to 2015?",
+                correctAnswer: "More than fourfold",
+                insight: "There is not decades of accumulated experience to even attempt to learn from. We're winging it."
+            },
+            {
+                id: 25,
+                question: "How long ago were dogs domesticated, and what does this contrast with regarding the modern financial system?",
+                correctAnswer: "Dogs domesticated 10,000 years ago; we have 20-50 years experience in modern finance",
+                insight: "For a topic that is so influenced by emotion versus fact, this is a problem."
+            },
+            {
+                id: 26,
+                question: "What did investor Michael Batnick say about lessons that have to be experienced?",
+                correctAnswer: "\"Some lessons have to be experienced before they can be understood\"",
+                insight: "We are all victims, in different ways, to that truth."
+            },
+            {
+                id: 27,
+                question: "What did John F. Kennedy say about his experience with the Great Depression?",
+                correctAnswer: "His family had one of the great fortunes and became wealthier during the Depression",
+                insight: "I have no first-hand knowledge of the Depression. My family had one of the great fortunes of the world and it was worth more than ever then."
+            },
+            {
+                id: 28,
+                question: "What did Frederick Lewis Allen write about how the Great Depression marked Americans?",
+                correctAnswer: "The Depression \"marked millions of Americans—inwardly—for the rest of their lives\"",
+                insight: "No amount of studying can genuinely recreate the power of fear and uncertainty."
+            },
+            {
+                id: 29,
+                question: "What did Bill Gates say about Lakeside School and Microsoft?",
+                correctAnswer: "\"If there had been no Lakeside, there would have been no Microsoft\"",
+                insight: "Gates is staggeringly smart, but he also had a one in a million head start."
+            },
+            {
+                id: 30,
+                question: "What did Paul Allen recall Bill Gates showing him and asking during their late-night sessions at Lakeside?",
+                correctAnswer: "A Fortune magazine; asked \"What do you think it's like to run a Fortune 500 company?\"",
+                insight: "Microsoft is now worth more than a trillion dollars."
+            },
+            {
+                id: 31,
+                question: "What is the central metaphor the author uses in Chapter 2?",
+                correctAnswer: "Luck and risk are siblings",
+                insight: "They are both the reality that every outcome in life is guided by forces other than individual effort."
+            },
+            {
+                id: 32,
+                question: "What did NYU professor Scott Galloway say about judging success?",
+                correctAnswer: "\"Nothing is as good or as bad as it seems\"",
+                insight: "It's so important to remember when judging success—both your own and others'."
+            },
+            {
+                id: 33,
+                question: "How did Bill Gates get access to a computer at Lakeside School?",
+                correctAnswer: "A teacher petitioned the Mothers' Club to use rummage sale proceeds",
+                insight: "The whole idea of time-sharing only got invented in 1965. Someone was pretty forward-looking."
+            },
+            {
+                id: 34,
+                question: "Who was Bill Dougall and what did he do?",
+                correctAnswer: "A WWII navy pilot turned teacher who believed in real-world experience",
+                insight: "He believed that book study wasn't enough without real-world experience."
+            },
+            {
+                id: 35,
+                question: "How much did the Lakeside School Mothers' Club pay to lease a computer in 1968?",
+                correctAnswer: "About $3,000",
+                insight: "Most university graduate schools did not have a computer anywhere near as advanced."
+            },
+            {
+                id: 36,
+                question: "When was the idea of time-sharing invented?",
+                correctAnswer: "1965",
+                insight: "Time-sharing only got invented in 1965, just three years before Gates got access."
+            },
+            {
+                id: 37,
+                question: "How many high-school-age people were there in the world in 1968?",
+                correctAnswer: "303 million",
+                insight: "Start with 303 million, end with 300. One in a million."
+            },
+            {
+                id: 38,
+                question: "How many of them lived in the Seattle area?",
+                correctAnswer: "About 100,000",
+                insight: "A tiny fraction of the global population."
+            },
+            {
+                id: 39,
+                question: "How many attended Lakeside School?",
+                correctAnswer: "About 300",
+                insight: "Bill Gates happened to be one of them."
+            },
+            {
+                id: 40,
+                question: "What happened to Bill Gates's friend Kent Evans?",
+                correctAnswer: "Died in a mountaineering accident before graduating high school",
+                insight: "Kent could have been a founding partner of Microsoft with Gates and Allen."
+            },
+            {
+                id: 41,
+                question: "What phone number did Bill Gates still remember from Kent Evans?",
+                correctAnswer: "525-7851",
+                insight: "Gates recalls this in the documentary Inside Bill's Brain."
+            },
+            {
+                id: 42,
+                question: "What problem did Lakeside School task Bill Gates and Kent Evans with solving?",
+                correctAnswer: "Building a computer program to schedule classes",
+                insight: "They were children, by any measure, asked to solve a complex scheduling problem."
+            },
+            {
+                id: 43,
+                question: "What did Bill Gates say about Kent Evans in the documentary Inside Bill's Brain?",
+                correctAnswer: "\"We would have kept working together. I'm sure we would have gone to college together\"",
+                insight: "Gates trails off after reminiscing about his friendship with Kent."
+            },
+            {
+                id: 44,
+                question: "What are the odds of being killed on a mountain in high school?",
+                correctAnswer: "Roughly one in a million",
+                insight: "Kent Evans experienced one in a million risk."
+            },
+            {
+                id: 45,
+                question: "What did economist Robert Shiller say he wanted to know about investing that we can't know?",
+                correctAnswer: "\"The exact role of luck in successful outcomes\"",
+                insight: "Since it's hard to quantify luck and rude to suggest people's success is owed to it, we often implicitly ignore it."
+            },
+            {
+                id: 46,
+                question: "What did economist Bhashkar Mazumder show about incomes among brothers?",
+                correctAnswer: "Incomes among brothers are more correlated than height or weight",
+                insight: "If you are rich and tall, your brother is more likely to also be rich than he is tall."
+            },
+            {
+                id: 47,
+                question: "What did Cornelius Vanderbilt say when told his business deals broke the law?",
+                correctAnswer: "\"My God, John... You don't suppose you can run a railroad in accordance with the statutes of the State of New York, do you?\"",
+                insight: "The line between 'inspiringly bold' and 'foolishly reckless' can be a millimeter thick."
+            },
+            {
+                id: 48,
+                question: "What did a judge call John D. Rockefeller's company?",
+                correctAnswer: "\"No better than a common thief\"",
+                insight: "His circumventing of the law is often portrayed by historians as cunning business smarts."
+            },
+            {
+                id: 49,
+                question: "What did Benjamin Graham say about his GEICO investment success?",
+                correctAnswer: "\"One lucky break, or one supremely shrewd decision—can we tell them apart?\"",
+                insight: "Not easily, Graham admitted."
+            },
+            {
+                id: 50,
+                question: "What did Bill Gates say about success being a lousy teacher?",
+                correctAnswer: "\"Success is a lousy teacher. It seduces smart people into thinking they can't lose\"",
+                insight: "When things are going extremely well, realize it's not as good as you think."
+            }
+        ];
+
+        // State
+        let currentQuestions = [];
+        let currentQuestionIndex = 0;
+        let userAnswers = [];
+        let revealedQuestions = [];
+        let userName = '';
+        let previousQuestionSet = [];
+
+        // Generate options for a question
+        function generateOptions(correctAnswer, questionId) {
+            // Create plausible wrong options based on question type
+            const wrongOptions = [];
+            
+            if (questionId === 1) { // Percentage question
+                wrongOptions.push("About 20%", "About 50%", "About 95%");
+            } else if (questionId === 2) { // Malmendier study
+                wrongOptions.push("Financial education determines success", "Market timing is most important", "Professional advice is key");
+            } else if (questionId === 3) { // Bill Gross
+                wrongOptions.push("He had insider information", "He took enormous risks", "He had a photographic memory for stocks");
+            } else if (questionId === 4) { // Stock market performance
+                wrongOptions.push("Both generations saw similar returns", "1950 generation saw 5x returns", "1970 generation saw flat returns");
+            } else if (questionId === 5 || questionId === 6) { // Unemployment rates
+                wrongOptions.push("15%", "25%", "35%");
+            } else if (questionId === 7) { // Germany/Japan markets
+                wrongOptions.push("They increased slightly", "They remained stable", "They doubled");
+            } else if (questionId === 8) { // US market
+                wrongOptions.push("Remained flat", "Slightly decreased", "Went up 10%");
+            } else if (questionId === 9) { // Factory worker story
+                wrongOptions.push("Sweatshops should be shut down", "American companies are evil", "Chinese workers are exploited");
+            } else if (questionId === 10) { // Lottery spending
+                wrongOptions.push("$100 per year", "$250 per year", "$600 per year");
+            } else if (questionId === 11) { // Emergency fund
+                wrongOptions.push("20%", "30%", "50%");
+            } else if (questionId === 12) { // Currency creator
+                wrongOptions.push("Julius Caesar", "Alexander the Great", "King Solomon");
+            } else if (questionId === 13) { // Retirement accounts
+                wrongOptions.push("$10 trillion", "$15 trillion", "$20 trillion");
+            } else if (questionId === 14) { // Labor force participation
+                wrongOptions.push("Below 30%", "Below 40%", "Below 20%");
+            } else if (questionId === 15) { // Social Security check
+                wrongOptions.push("$200", "$300", "$500");
+            } else if (questionId === 16) { // Social Security exceeds
+                wrongOptions.push("1950s", "1960s", "1970s");
+            } else if (questionId === 17) { // Poverty percentage
+                wrongOptions.push("Less than 10%", "About 15%", "About 20%");
+            } else if (questionId === 18) { // Pension income
+                wrongOptions.push("More than half", "About 75%", "About 90%");
+            } else if (questionId === 19) { // Pension percentage
+                wrongOptions.push("About 30%", "About 45%", "About 60%");
+            } else if (questionId === 20) { // NYT retirement quote
+                wrongOptions.push("\"Retirement is the American dream\"", "\"Everyone deserves a pension\"", "\"Retirement savings are growing\"");
+            } else if (questionId === 21) { // 401k created
+                wrongOptions.push("1968", "1988", "1995");
+            } else if (questionId === 22) { // Roth IRA
+                wrongOptions.push("1978", "1988", "2000");
+            } else if (questionId === 23) { // Bachelor's degree
+                wrongOptions.push("1 in 10 to 1 in 3", "1 in 5 to 1 in 2", "1 in 8 to 1 in 5");
+            } else if (questionId === 24) { // Tuition rise
+                wrongOptions.push("Slightly less", "About double", "About triple");
+            } else if (questionId === 25) { // Dogs domesticated
+                wrongOptions.push("1,000 years; we have centuries of experience", "100,000 years; we have millennia of experience", "500 years; we have decades of experience");
+            } else if (questionId === 26) { // Batnick quote
+                wrongOptions.push("\"Knowledge is power\"", "\"Experience is the best teacher\"", "\"Learn from others' mistakes\"");
+            } else if (questionId === 27) { // JFK Depression
+                wrongOptions.push("His family lost everything", "He worked in a factory", "He was unemployed for years");
+            } else if (questionId === 28) { // Frederick Lewis Allen
+                wrongOptions.push("The Depression was quickly forgotten", "The Depression only affected the poor", "The Depression made Americans stronger");
+            } else if (questionId === 29) { // Gates on Lakeside
+                wrongOptions.push("\"Lakeside taught me everything\"", "\"My teachers were my inspiration\"", "\"Lakeside was just another school\"");
+            } else if (questionId === 30) { // Fortune magazine
+                wrongOptions.push("A Wall Street Journal; asked about stocks", "A Business Week; asked about careers", "A Time magazine; asked about the future");
+            } else if (questionId === 31) { // Central metaphor
+                wrongOptions.push("Fear and greed", "Patience and impatience", "Saving and spending");
+            } else if (questionId === 32) { // Scott Galloway
+                wrongOptions.push("\"Success is earned\"", "\"Failure builds character\"", "\"Hard work pays off\"");
+            } else if (questionId === 33) { // Gates computer access
+                wrongOptions.push("His father bought one for the school", "IBM donated computers", "The state government funded it");
+            } else if (questionId === 34) { // Bill Dougall
+                wrongOptions.push("A computer programmer who taught part-time", "A wealthy donor who loved technology", "The school principal who wanted innovation");
+            } else if (questionId === 35) { // Mothers' Club payment
+                wrongOptions.push("About $1,000", "About $5,000", "About $10,000");
+            } else if (questionId === 36) { // Time-sharing invented
+                wrongOptions.push("1955", "1960", "1970");
+            } else if (questionId === 37) { // High school population
+                wrongOptions.push("100 million", "200 million", "400 million");
+            } else if (questionId === 38) { // Seattle area
+                wrongOptions.push("About 10,000", "About 50,000", "About 200,000");
+            } else if (questionId === 39) { // Lakeside attendees
+                wrongOptions.push("About 100", "About 500", "About 1,000");
+            } else if (questionId === 40) { // Kent Evans
+                wrongOptions.push("Became a professor at Harvard", "Started a competing software company", "Became a billionaire investor");
+            } else if (questionId === 41) { // Phone number
+                wrongOptions.push("555-1234", "525-1234", "555-7851");
+            } else if (questionId === 42) { // Scheduling problem
+                wrongOptions.push("Creating a library catalog system", "Designing a grading database", "Building a student directory");
+            } else if (questionId === 43) { // Gates on Kent
+                wrongOptions.push("\"Kent was my best friend\"", "\"Kent taught me everything\"", "\"I miss Kent every day\"");
+            } else if (questionId === 44) { // Mountain death odds
+                wrongOptions.push("One in ten thousand", "One in hundred thousand", "One in five hundred thousand");
+            } else if (questionId === 45) { // Robert Shiller
+                wrongOptions.push("\"When the next crash will occur\"", "\"Which stocks will double\"", "\"How to beat the market\"");
+            } else if (questionId === 46) { // Mazumder research
+                wrongOptions.push("Incomes are not correlated at all", "Incomes are less correlated than eye color", "Incomes are perfectly correlated");
+            } else if (questionId === 47) { // Vanderbilt quote
+                wrongOptions.push("\"The law is meant to be broken\"", "\"I make my own rules\"", "\"Success requires breaking rules\"");
+            } else if (questionId === 48) { // Rockefeller judge
+                wrongOptions.push("\"A brilliant businessman\"", "\"An innovative entrepreneur\"", "\"A ruthless monopolist\"");
+            } else if (questionId === 49) { // Graham GEICO
+                wrongOptions.push("\"My greatest investment was also my riskiest\"", "\"Diversification is overrated\"", "\"Value investing always works\"");
+            } else if (questionId === 50) { // Gates success quote
+                wrongOptions.push("\"Success comes to those who work hard\"", "\"Failure is the key to success\"", "\"Learn from your mistakes\"");
+            } else {
+                // Default wrong options
+                wrongOptions.push("First wrong option", "Second wrong option", "Third wrong option");
+            }
+            
+            // Combine correct with wrong and shuffle
+            let allOptions = [correctAnswer, ...wrongOptions.slice(0, 3)];
+            return shuffleArray(allOptions);
+        }
+
+        // Shuffle array
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        // Create new question set (random 20 from master)
+        function createNewQuestionSet() {
+            const shuffled = shuffleArray([...masterQuestions]);
+            return shuffled.slice(0, 20).map(q => ({
+                ...q,
+                options: generateOptions(q.correctAnswer, q.id)
+            }));
+        }
+
+        // Create same question set (fixed set from first 20)
+        function createSameQuestionSet() {
+            return masterQuestions.slice(0, 20).map(q => ({
+                ...q,
+                options: generateOptions(q.correctAnswer, q.id)
+            }));
+        }
+
+        // Initialize
+        document.getElementById('userName').addEventListener('input', function(e) {
+            const startBtn = document.getElementById('startBtn');
+            const name = e.target.value.trim();
+            startBtn.disabled = name.length === 0;
+        });
+
+        function startExam() {
+            userName = document.getElementById('userName').value.trim();
+            if (!userName) return;
+            
+            // First attempt always uses a new random set
+            currentQuestions = createNewQuestionSet();
+            previousQuestionSet = currentQuestions;
+            
+            currentQuestionIndex = 0;
+            userAnswers = new Array(currentQuestions.length).fill(null);
+            revealedQuestions = new Array(currentQuestions.length).fill(false);
+            
+            document.getElementById('displayName').textContent = userName;
+            document.getElementById('questionCount').textContent = `${currentQuestions.length} Questions`;
+            document.getElementById('welcomeScreen').style.display = 'none';
+            document.getElementById('examScreen').style.display = 'block';
+            
+            renderQuestion();
+        }
+
+        function renderQuestion() {
+            const q = currentQuestions[currentQuestionIndex];
+            const container = document.getElementById('questionContainer');
+            const selectedAnswer = userAnswers[currentQuestionIndex];
+            const isRevealed = revealedQuestions[currentQuestionIndex];
+            
+            let optionsHtml = q.options.map((opt, index) => {
+                let optionClass = 'option-item';
+                
+                if (isRevealed) {
+                    if (opt === q.correctAnswer) {
+                        optionClass += ' revealed-correct';
+                    } else if (selectedAnswer === index && opt !== q.correctAnswer) {
+                        optionClass += ' revealed-wrong';
+                    } else {
+                        optionClass += ' disabled';
+                    }
+                } else {
+                    if (selectedAnswer === index) {
+                        if (opt === q.correctAnswer) {
+                            optionClass += ' correct-selected';
+                        } else {
+                            optionClass += ' wrong-selected';
+                        }
+                    }
+                }
+                
+                return `
+                    <div class="${optionClass}" onclick="selectOption(${index})">
+                        <span class="option-prefix">${String.fromCharCode(65 + index)}</span>
+                        <span>${opt}</span>
+                    </div>
+                `;
+            }).join('');
+            
+            const insightHtml = isRevealed ? `
+                <div class="insight-box">
+                    <div class="insight-label">📘 INSIGHT</div>
+                    <div class="insight-text">${q.insight}</div>
+                </div>
+            ` : '';
+            
+            container.innerHTML = `
+                <div class="question-number-badge">Question ${currentQuestionIndex + 1} of ${currentQuestions.length}</div>
+                <div class="question-text">${q.question}</div>
+                <div class="options-list">${optionsHtml}</div>
+                ${insightHtml}
+            `;
+            
+            updateProgress();
+            updateNavButtons();
+        }
+
+        function selectOption(optionIndex) {
+            if (revealedQuestions[currentQuestionIndex]) return;
+            
+            const question = currentQuestions[currentQuestionIndex];
+            const selectedOption = question.options[optionIndex];
+            
+            userAnswers[currentQuestionIndex] = optionIndex;
+            
+            if (selectedOption === question.correctAnswer) {
+                revealedQuestions[currentQuestionIndex] = true;
+            }
+            
+            renderQuestion();
+        }
+
+        function nextQuestion() {
+            if (currentQuestionIndex < currentQuestions.length - 1) {
+                currentQuestionIndex++;
+                renderQuestion();
+            } else if (currentQuestionIndex === currentQuestions.length - 1) {
+                showResults();
+            }
+        }
+
+        function prevQuestion() {
+            if (currentQuestionIndex > 0) {
+                currentQuestionIndex--;
+                renderQuestion();
+            }
+        }
+
+        function updateNavButtons() {
+            document.getElementById('prevBtn').disabled = currentQuestionIndex === 0;
+            const nextBtn = document.getElementById('nextBtn');
+            nextBtn.textContent = currentQuestionIndex === currentQuestions.length - 1 ? 'Finish →' : 'Next →';
+        }
+
+        function updateProgress() {
+            const correctCount = revealedQuestions.filter(v => v).length;
+            const progress = (correctCount / currentQuestions.length) * 100;
+            
+            document.getElementById('currentQuestionDisplay').textContent = `Question ${currentQuestionIndex + 1} of ${currentQuestions.length}`;
+            document.getElementById('scoreDisplay').textContent = `${correctCount}/${currentQuestions.length} correct`;
+            document.getElementById('progressBar').style.width = `${progress}%`;
+        }
+
+        function showResults() {
+            document.getElementById('examScreen').style.display = 'none';
+            document.getElementById('resultsScreen').style.display = 'block';
+            
+            const correctCount = revealedQuestions.filter(v => v).length;
+            const totalQuestions = currentQuestions.length;
+            
+            let greeting = '';
+            let message = '';
+            
+            if (correctCount >= totalQuestions * 0.9) {
+                greeting = `Excellent, ${userName}!`;
+                message = 'You truly understand the psychology of money!';
+            } else if (correctCount >= totalQuestions * 0.7) {
+                greeting = `Great job, ${userName}!`;
+                message = 'You have a solid grasp of these concepts.';
+            } else if (correctCount >= totalQuestions * 0.5) {
+                greeting = `Good effort, ${userName}!`;
+                message = 'You\'re on the right track. Keep learning!';
+            } else {
+                greeting = `Nice try, ${userName}!`;
+                message = 'Review your wrong answers below.';
+            }
+            
+            document.getElementById('resultGreeting').textContent = greeting;
+            document.getElementById('resultMessage').textContent = message;
+            document.getElementById('finalScoreText').textContent = `${correctCount}/${totalQuestions}`;
+            
+            generateReview();
+        }
+
+        function generateReview() {
+            const reviewContainer = document.getElementById('reviewContainer');
+            let reviewHtml = '<div class="review-title">🔍 Answer Review</div>';
+            
+            currentQuestions.forEach((q, index) => {
+                const userAnswerIndex = userAnswers[index];
+                const isCorrect = revealedQuestions[index];
+                const userOption = userAnswerIndex !== null ? q.options[userAnswerIndex] : 'Not answered';
+                
+                if (!isCorrect) {
+                    reviewHtml += `
+                        <div class="review-item incorrect-review">
+                            <div class="review-question">Q${index + 1}: ${q.question.substring(0, 60)}${q.question.length > 60 ? '...' : ''}</div>
+                            <div class="review-answers">
+                                <div class="review-answer-row">
+                                    <span class="review-badge correct-badge">✓</span>
+                                    <span class="review-text"><strong>Correct:</strong> ${q.correctAnswer.substring(0, 50)}${q.correctAnswer.length > 50 ? '...' : ''}</span>
+                                </div>
+                                <div class="review-answer-row">
+                                    <span class="review-badge incorrect-badge">✗</span>
+                                    <span class="review-text"><strong>Your answer:</strong> ${userOption.substring(0, 50)}${userOption.length > 50 ? '...' : ''}</span>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                }
+            });
+            
+            if (revealedQuestions.every(v => v)) {
+                reviewHtml += '<div style="text-align: center; padding: 20px; color: #16a34a; font-weight: 600;">🎉 Perfect! No wrong answers!</div>';
+            }
+            
+            reviewContainer.innerHTML = reviewHtml;
+        }
+
+        function retrySame() {
+            // Use the previous question set
+            currentQuestions = previousQuestionSet.map(q => ({
+                ...q,
+                options: generateOptions(q.correctAnswer, q.id)
+            }));
+            
+            currentQuestionIndex = 0;
+            userAnswers = new Array(currentQuestions.length).fill(null);
+            revealedQuestions = new Array(currentQuestions.length).fill(false);
+            
+            document.getElementById('resultsScreen').style.display = 'none';
+            document.getElementById('examScreen').style.display = 'block';
+            document.getElementById('questionCount').textContent = `${currentQuestions.length} Questions`;
+            
+            renderQuestion();
+        }
+
+        function retryNew() {
+            // Create a new random set of 20 questions from master
+            currentQuestions = createNewQuestionSet();
+            previousQuestionSet = currentQuestions;
+            
+            currentQuestionIndex = 0;
+            userAnswers = new Array(currentQuestions.length).fill(null);
+            revealedQuestions = new Array(currentQuestions.length).fill(false);
+            
+            document.getElementById('resultsScreen').style.display = 'none';
+            document.getElementById('examScreen').style.display = 'block';
+            document.getElementById('questionCount').textContent = `${currentQuestions.length} Questions`;
+            
+            renderQuestion();
+        }
+
+        function backToHome() {
+            document.getElementById('resultsScreen').style.display = 'none';
+            document.getElementById('welcomeScreen').style.display = 'block';
+            document.getElementById('userName').value = '';
+            document.getElementById('startBtn').disabled = true;
+        }
+
+        // Handle enter key
+        document.getElementById('userName').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                const name = e.target.value.trim();
+                if (name) {
+                    startExam();
+                }
+            }
+        });
+    </script>
+</body>
+</html>
