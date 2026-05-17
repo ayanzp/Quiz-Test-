@@ -605,11 +605,244 @@
             border: 1px solid #3c4138;
         }
 
+        /* ===== HAMBURGER MENU ===== */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 6px;
+            z-index: 200;
+        }
+        .hamburger span {
+            display: block;
+            width: 24px;
+            height: 2px;
+            background: var(--dark-black);
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }
+        .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+        .hamburger.open span:nth-child(2) { opacity: 0; }
+        .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(41, 42, 39, 0.97);
+            z-index: 150;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 2rem;
+            padding: 2rem;
+        }
+        .mobile-menu.open { display: flex; }
+        .mobile-menu a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.6rem;
+            font-weight: 700;
+            font-family: var(--font-serif);
+            transition: color 0.2s;
+        }
+        .mobile-menu a:hover, .mobile-menu a.active { color: var(--primary-accent); }
+        .mobile-menu-icons {
+            display: flex;
+            gap: 2rem;
+            margin-top: 1rem;
+        }
+        .mobile-menu-icons a {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.85rem;
+            font-family: var(--font-sans);
+        }
+        .mobile-menu-icons i { font-size: 1.4rem; }
+        .mobile-menu-close {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            color: white;
+            font-size: 1.6rem;
+            cursor: pointer;
+            background: none;
+            border: none;
+        }
+
+        /* ===== TABLET (max 1024px) ===== */
         @media (max-width: 1024px) {
+            .hero-title { font-size: 4.5rem; }
+            .search-bar { width: 240px; }
+            .nav-links { gap: 1.2rem; font-size: 0.85rem; }
             .hero-section { grid-template-columns: 1fr; }
             .features-bar { flex-wrap: wrap; gap: 2rem; }
-            .category-grid, .product-grid { grid-template-columns: repeat(2, 1fr); }
+            .category-grid { grid-template-columns: repeat(3, 1fr); }
+            .product-grid { grid-template-columns: repeat(2, 1fr); }
             .footer-grid { grid-template-columns: 1fr 1fr; }
+            .promo-title { font-size: 2.5rem; }
+        }
+
+        /* ===== MOBILE (max 768px) ===== */
+        @media (max-width: 768px) {
+
+            /* --- Header --- */
+            header {
+                padding: 1rem 4%;
+                flex-wrap: wrap;
+                gap: 0.8rem;
+                justify-content: space-between;
+                align-items: center;
+            }
+            .logo { font-size: 1.5rem; }
+            .search-bar {
+                order: 3;
+                width: 100%;
+                margin-top: 0.2rem;
+            }
+            .nav-links { display: none; }
+            .nav-icons { display: none; }
+            .hamburger { display: flex; }
+
+            /* --- Hero --- */
+            .hero-section {
+                grid-template-columns: 1fr;
+                padding: 1.5rem 4% 3rem;
+                gap: 2rem;
+            }
+            .hero-title {
+                font-size: 3.2rem;
+                letter-spacing: -0.5px;
+            }
+            .hero-desc {
+                font-size: 1rem;
+                max-width: 100%;
+            }
+            .hero-desc br { display: none; }
+            .hero-buttons {
+                flex-direction: column;
+                gap: 0.8rem;
+                margin-bottom: 2rem;
+            }
+            .btn {
+                width: 100%;
+                text-align: center;
+                padding: 14px 20px;
+            }
+            .hero-stats {
+                gap: 0.8rem;
+                flex-wrap: wrap;
+            }
+            .stat-card {
+                min-width: calc(33% - 0.8rem);
+                flex: 1;
+                padding: 1rem;
+            }
+            .stat-card h3 { font-size: 1.4rem; }
+
+            .main-hero-image {
+                height: 280px;
+                border-radius: 20px;
+            }
+            .hero-craft-text { font-size: 0.85rem; }
+            .btn-pill { font-size: 0.85rem; padding: 10px 22px; }
+
+            /* --- Features Bar --- */
+            .features-bar {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 0;
+                padding: 0;
+            }
+            .feature-item {
+                padding: 1.4rem 1rem;
+                border-right: 1px solid #3c4138;
+                border-bottom: 1px solid #3c4138;
+                gap: 0.7rem;
+            }
+            .feature-item:nth-child(2n) { border-right: none; }
+            .feature-item:nth-child(3), .feature-item:nth-child(4) { border-bottom: none; }
+            .feature-item i { font-size: 1.4rem; }
+            .feature-text h4 { font-size: 0.9rem; }
+            .feature-text p { font-size: 0.78rem; }
+
+            /* --- Category Section --- */
+            .category-section { padding: 3.5rem 4%; }
+            .section-title { font-size: 2rem; }
+            .section-subtitle { font-size: 0.95rem; margin-bottom: 2rem; }
+
+            .category-toggles { gap: 0.8rem; margin-bottom: 2.5rem; }
+            .toggle-btn { padding: 11px 28px; font-size: 0.9rem; }
+
+            .category-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 1rem;
+                margin-bottom: 2.5rem;
+            }
+            .category-card { padding: 1.5rem 0.8rem; gap: 0.8rem; border-radius: 14px; }
+            .icon-wrapper { width: 52px; height: 52px; font-size: 1.4rem; border-radius: 12px; }
+            .category-card span { font-size: 0.9rem; }
+
+            /* --- Featured Products --- */
+            .featured-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.6rem;
+                margin-bottom: 1.5rem;
+            }
+            .featured-header h2.section-title { font-size: 1.8rem !important; }
+            .view-all { font-size: 0.9rem; }
+
+            .product-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1rem;
+            }
+            .product-img-box { height: 220px; border-radius: 14px; }
+            .product-title { font-size: 0.95rem; }
+            .product-price { font-size: 1rem; }
+
+            /* --- Promo --- */
+            .promo-section { padding: 4rem 1.5rem; }
+            .promo-title { font-size: 2rem; line-height: 1.2; }
+            .promo-desc { font-size: 1rem; }
+            .btn-white { padding: 12px 28px; }
+
+            /* --- Footer --- */
+            footer { padding: 3rem 4% 2rem; }
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+                margin-bottom: 2.5rem;
+            }
+            .footer-about { max-width: 100%; }
+            .footer-badges { flex-direction: column; gap: 0.6rem; }
+            .footer-col[style*="span"] { grid-column: span 1 !important; }
+
+            .footer-bottom {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+            .payment-methods { flex-wrap: wrap; justify-content: center; }
+
+            /* Spacing fix */
+            .category-section br { display: none; }
+            .category-section > br + br + br { display: none; }
+        }
+
+        /* ===== SMALL MOBILE (max 400px) ===== */
+        @media (max-width: 400px) {
+            .hero-title { font-size: 2.6rem; }
+            .category-grid { grid-template-columns: repeat(2, 1fr); }
+            .product-grid { grid-template-columns: 1fr 1fr; }
+            .product-img-box { height: 180px; }
+            .disclaimer-banner { font-size: 0.75rem; padding: 7px 10px; }
         }
     </style>
 </head>
@@ -650,7 +883,33 @@
                     <span>Login</span>
                 </a>
             </div>
+
+            <button class="hamburger" id="hamburger" aria-label="Open menu">
+                <span></span><span></span><span></span>
+            </button>
         </header>
+
+        <!-- Mobile Nav Overlay -->
+        <div class="mobile-menu" id="mobileMenu">
+            <button class="mobile-menu-close" id="menuClose" aria-label="Close menu">&times;</button>
+            <a href="#" class="active">Home</a>
+            <a href="#">All Items</a>
+            <a href="#">Men</a>
+            <a href="#">Women</a>
+            <a href="#">Hand Craft</a>
+            <a href="#">Artists</a>
+            <a href="#">About</a>
+            <div class="mobile-menu-icons">
+                <a href="#" class="icon-btn" style="color:white;">
+                    <i class="fas fa-shopping-bag"></i>
+                    <span>Cart</span>
+                </a>
+                <a href="#" class="icon-btn" style="color:white;">
+                    <i class="far fa-user"></i>
+                    <span>Login</span>
+                </a>
+            </div>
+        </div>
 
         <section class="hero-section">
             <div class="hero-left">
@@ -872,5 +1131,28 @@
         </div>
     </footer>
 
+    <script>
+        const hamburger = document.getElementById('hamburger');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const menuClose = document.getElementById('menuClose');
+
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('open');
+            mobileMenu.classList.toggle('open');
+            document.body.style.overflow = mobileMenu.classList.contains('open') ? 'hidden' : '';
+        });
+        menuClose.addEventListener('click', () => {
+            hamburger.classList.remove('open');
+            mobileMenu.classList.remove('open');
+            document.body.style.overflow = '';
+        });
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('open');
+                mobileMenu.classList.remove('open');
+                document.body.style.overflow = '';
+            });
+        });
+    </script>
 </body>
 </html>
